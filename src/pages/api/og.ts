@@ -51,8 +51,9 @@ export const GET: APIRoute = async ({ request }) => {
     }
 
     // Also pass through any extra query params (template-specific fields)
+    // These override template defaults so URL params always take precedence
     url.searchParams.forEach((value, key) => {
-      if (!(key in mergedParams) && value) {
+      if (value && !(key in params)) {
         mergedParams[key] = value;
       }
     });
